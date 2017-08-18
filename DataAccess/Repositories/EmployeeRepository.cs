@@ -23,16 +23,18 @@ namespace DataAccess.Repositories
         public async Task<PagedResult<EmployeeSearchResult>> GetEmployees(EmployeeSearchRequest searchRequest)
         {
 
-            var query = Find(e => e.FirstName.Contains(searchRequest.SearchKeyWord) ||
-                                  e.LastName.Contains(searchRequest.SearchKeyWord) ||
-                                  string.IsNullOrEmpty(searchRequest.SearchKeyWord));
+            var query = Find(e => string.IsNullOrEmpty(searchRequest.SearchKeyWord) ||
+                                  e.FirstName.Contains(searchRequest.SearchKeyWord) ||
+                                  e.LastName.Contains(searchRequest.SearchKeyWord));
 
             var page = query.Select(e => new EmployeeSearchResult
             {
                 FirstName = e.FirstName,
                 LastName = e.LastName,
                 Title = e.Title,
-                ReffersTo = e.EmployeeManager.FirstName + "  " + e.EmployeeManager.LastName,
+                ReffersTo = e.EmployeeManager == null 
+                            ? string.Empty 
+                            : e.EmployeeManager.FirstName + "  " + e.EmployeeManager.LastName,
                 TotalSoldProducts = (from o in Context.Orders
                                      join od in Context.OrderDetails on o.OrderId equals od.OrderId
                                      where e.EmployeeId == o.EmployeeId
