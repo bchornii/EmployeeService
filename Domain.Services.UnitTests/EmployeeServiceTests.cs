@@ -98,7 +98,7 @@ namespace Domain.Services.UnitTests
         }
 
         [Test]
-        public async Task GetEmployees_3EmployeeRecordsFound_Returns3Records()
+        public async Task GetEmployees_EmployeeRecordsFound_ReturnsTheSameRecords()
         {
             // Arrange
             var fixture = new EmployeeServiceFixture()
@@ -107,19 +107,28 @@ namespace Domain.Services.UnitTests
                 .InitializeEmployeeService();
 
             var amountOfResults = 3;
+            var employeeSearchRequest = new EmployeeSearchRequest
+            {
+                SearchKeyWord = EmployeeServiceFixture.EmployeeFirstName
+
+            };
+            var expectedResults = fixture.GetSearchResults(amountOfResults, employeeSearchRequest.SearchKeyWord);
             Mock.Get(fixture.EmployeeRepositoryMock)
-                .Setup(r => r.GetEmployees(It.IsAny<EmployeeSearchRequest>()))
-                .ReturnsAsync(fixture.GetSearchResults(amountOfResults));
+                .Setup(r => r.GetEmployees(employeeSearchRequest))
+                .ReturnsAsync(expectedResults);
 
             // Act
-            var employees = await fixture.EmployeeService.GetEmployees(It.IsAny<EmployeeSearchRequest>());
+            var employees = await fixture.EmployeeService.GetEmployees(employeeSearchRequest);
 
             // Assert
-            Assert.AreEqual(amountOfResults, employees.Items.Count());            
+            CollectionAssert.AreEqual(employees.Items, expectedResults.Items);
         }
 
         private class EmployeeServiceFixture
         {
+            public const string EmployeeFirstName = "Margaret";
+            public const string EmployeeLastName = "Peacock";
+
             private IUnitOfWork UnitOfWorkMock { get; set; }
             public IEmployeeRepository EmployeeRepositoryMock { get; private set; }
             public IEmployeeService EmployeeService { get; private set; }
@@ -143,8 +152,8 @@ namespace Domain.Services.UnitTests
                 return this;
             }
 
-            public PagedResult<EmployeeSearchResult> GetSearchResults(int amountOfResults) =>
-                GetPageResult(Enumerable.Repeat(new EmployeeSearchResult(), amountOfResults), amountOfResults);                
+            public PagedResult<EmployeeSearchResult> GetSearchResults(int amountOfResults, string firstName) =>
+                GetPageResult(Enumerable.Repeat(new EmployeeSearchResult { FirstName = firstName }, amountOfResults), amountOfResults);
 
             public PagedResult<EmployeeSearchResult> GetPageResult(IEnumerable<EmployeeSearchResult> items, int count) =>
                 new PagedResult<EmployeeSearchResult>(items, count);
