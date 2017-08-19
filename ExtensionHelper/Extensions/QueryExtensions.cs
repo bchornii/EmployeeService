@@ -4,7 +4,7 @@ using Domain.Models.Enums;
 
 namespace Common.Extensions
 {
-    public static class Extensions
+    public static class QueryExtensions
     {
         public static IOrderedQueryable<T> Order<T>(this IQueryable<T> source, string propertyName, SortDirection descending, bool anotherLevel = false)
         {
