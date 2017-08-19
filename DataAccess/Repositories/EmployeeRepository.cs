@@ -22,10 +22,10 @@ namespace DataAccess.Repositories
 
         public async Task<PagedResult<EmployeeSearchResult>> GetEmployees(EmployeeSearchRequest searchRequest)
         {
-
+            var searchRequestKeyword = searchRequest.SearchKeyWord?.ToUpper();
             var query = Find(e => string.IsNullOrEmpty(searchRequest.SearchKeyWord) ||
-                                  e.FirstName.Contains(searchRequest.SearchKeyWord) ||
-                                  e.LastName.Contains(searchRequest.SearchKeyWord));
+                                  e.FirstName.ToUpper().Contains(searchRequestKeyword) ||
+                                  e.LastName.ToUpper().Contains(searchRequestKeyword));
 
             var page = query.Select(e => new EmployeeSearchResult
             {
