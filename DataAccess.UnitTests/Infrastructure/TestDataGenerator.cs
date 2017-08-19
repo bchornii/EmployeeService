@@ -8,11 +8,11 @@ namespace DataAccess.UnitTests.Infrastructure
     {
         public static IQueryable<Employee> GetEmployees()
         {
-            var employee4 = new Employee
+            var employee1 = new Employee
             {
-                EmployeeId = 4,
-                FirstName = "Margaret",
-                LastName = "Peacock",
+                EmployeeId = 1,
+                FirstName = "Nancy",
+                LastName = "Davolio",
                 Title = "Sales Representative"
             };
             var employee2 = new Employee
@@ -22,51 +22,423 @@ namespace DataAccess.UnitTests.Infrastructure
                 LastName = "Fuller",
                 Title = "Vice President, Sales"
             };
+            var employee3 = new Employee
+            {
+                EmployeeId = 3,
+                FirstName = "Janet",
+                LastName = "Leverling",
+                Title = "Sales Representative"
+            };
+            var employee4 = new Employee
+            {
+                EmployeeId = 4,
+                FirstName = "Margaret",
+                LastName = "Peacock",
+                Title = "Sales Representative"
+            };
+            var employee5 = new Employee
+            {
+                EmployeeId = 5,
+                FirstName = "Steven",
+                LastName = "Buchanan",
+                Title = "Sales Manager"
+            };
+            var employee6 = new Employee
+            {
+                EmployeeId = 6,
+                FirstName = "Michael",
+                LastName = "Suyama",
+                Title = "Sales Representative"
+            };
+            var employee7 = new Employee
+            {
+                EmployeeId = 7,
+                FirstName = "Robert",
+                LastName = "King",
+                Title = "Sales Representative"
+            };
+            var employee8 = new Employee
+            {
+                EmployeeId = 8,
+                FirstName = "Laura",
+                LastName = "Callahan",
+                Title = "Inside Sales Coordinator"
+            };
+            var employee9 = new Employee
+            {
+                EmployeeId = 9,
+                FirstName = "Anne",
+                LastName = "Dodsworth",
+                Title = "Sales Representative"
+            };
 
+            employee1.EmployeeManager = employee2;
+            employee3.EmployeeManager = employee2;
             employee4.EmployeeManager = employee2;
+            employee5.EmployeeManager = employee2;
+            employee6.EmployeeManager = employee5;
+            employee7.EmployeeManager = employee5;
+            employee8.EmployeeManager = employee2;
+            employee9.EmployeeManager = employee5;
+
 
             return new List<Employee>
-                {
-                    employee2,
-                    employee4
-                }.AsQueryable();
+            {
+                employee1,
+                employee2,
+                employee3,
+                employee4,
+                employee5,
+                employee6,
+                employee7,
+                employee8,
+                employee9
+            }.AsQueryable();
         }
 
         public static IQueryable<Order> GetOrders()
         {
             return new List<Order>
-                {
-                    new Order
-                    {
-                        OrderId = 10250,
-                        EmployeeId = 4
-                    }
-                }.AsQueryable();
+            {
+                new Order {OrderId = 11077, EmployeeId = 1},
+                new Order {OrderId = 11071, EmployeeId = 1},
+                new Order {OrderId = 11069, EmployeeId = 1},
+                new Order {OrderId = 11067, EmployeeId = 1},
+                new Order {OrderId = 11064, EmployeeId = 1},
+                new Order {OrderId = 11039, EmployeeId = 1},
+                new Order {OrderId = 11038, EmployeeId = 1},
+                new Order {OrderId = 11027, EmployeeId = 1},
+                new Order {OrderId = 11023, EmployeeId = 1},
+                new Order {OrderId = 11012, EmployeeId = 1},
+                new Order {OrderId = 11073, EmployeeId = 2},
+                new Order {OrderId = 11070, EmployeeId = 2},
+                new Order {OrderId = 11060, EmployeeId = 2},
+                new Order {OrderId = 11059, EmployeeId = 2},
+                new Order {OrderId = 11053, EmployeeId = 2},
+                new Order {OrderId = 11042, EmployeeId = 2},
+                new Order {OrderId = 11035, EmployeeId = 2},
+                new Order {OrderId = 11032, EmployeeId = 2},
+                new Order {OrderId = 11028, EmployeeId = 2},
+                new Order {OrderId = 11020, EmployeeId = 2},
+                new Order {OrderId = 11063, EmployeeId = 3},
+                new Order {OrderId = 11057, EmployeeId = 3},
+                new Order {OrderId = 11052, EmployeeId = 3},
+                new Order {OrderId = 11049, EmployeeId = 3},
+                new Order {OrderId = 11041, EmployeeId = 3},
+                new Order {OrderId = 11021, EmployeeId = 3},
+                new Order {OrderId = 11011, EmployeeId = 3},
+                new Order {OrderId = 11006, EmployeeId = 3},
+                new Order {OrderId = 11004, EmployeeId = 3},
+                new Order {OrderId = 11003, EmployeeId = 3},
+                new Order {OrderId = 11076, EmployeeId = 4},
+                new Order {OrderId = 11072, EmployeeId = 4},
+                new Order {OrderId = 11062, EmployeeId = 4},
+                new Order {OrderId = 11061, EmployeeId = 4},
+                new Order {OrderId = 11044, EmployeeId = 4},
+                new Order {OrderId = 11040, EmployeeId = 4},
+                new Order {OrderId = 11029, EmployeeId = 4},
+                new Order {OrderId = 11026, EmployeeId = 4},
+                new Order {OrderId = 11024, EmployeeId = 4},
+                new Order {OrderId = 11018, EmployeeId = 4},
+                new Order {OrderId = 11043, EmployeeId = 5},
+                new Order {OrderId = 10954, EmployeeId = 5},
+                new Order {OrderId = 10922, EmployeeId = 5},
+                new Order {OrderId = 10899, EmployeeId = 5},
+                new Order {OrderId = 10874, EmployeeId = 5},
+                new Order {OrderId = 10872, EmployeeId = 5},
+                new Order {OrderId = 10870, EmployeeId = 5},
+                new Order {OrderId = 10869, EmployeeId = 5},
+                new Order {OrderId = 10866, EmployeeId = 5},
+                new Order {OrderId = 10851, EmployeeId = 5},
+                new Order {OrderId = 11045, EmployeeId = 6},
+                new Order {OrderId = 11031, EmployeeId = 6},
+                new Order {OrderId = 11025, EmployeeId = 6},
+                new Order {OrderId = 11019, EmployeeId = 6},
+                new Order {OrderId = 10999, EmployeeId = 6},
+                new Order {OrderId = 10973, EmployeeId = 6},
+                new Order {OrderId = 10965, EmployeeId = 6},
+                new Order {OrderId = 10959, EmployeeId = 6},
+                new Order {OrderId = 10956, EmployeeId = 6},
+                new Order {OrderId = 10944, EmployeeId = 6},
+                new Order {OrderId = 11074, EmployeeId = 7},
+                new Order {OrderId = 11066, EmployeeId = 7},
+                new Order {OrderId = 11055, EmployeeId = 7},
+                new Order {OrderId = 11051, EmployeeId = 7},
+                new Order {OrderId = 11048, EmployeeId = 7},
+                new Order {OrderId = 11047, EmployeeId = 7},
+                new Order {OrderId = 11037, EmployeeId = 7},
+                new Order {OrderId = 11033, EmployeeId = 7},
+                new Order {OrderId = 11030, EmployeeId = 7},
+                new Order {OrderId = 11008, EmployeeId = 7},
+                new Order {OrderId = 11075, EmployeeId = 8},
+                new Order {OrderId = 11068, EmployeeId = 8},
+                new Order {OrderId = 11065, EmployeeId = 8},
+                new Order {OrderId = 11056, EmployeeId = 8},
+                new Order {OrderId = 11054, EmployeeId = 8},
+                new Order {OrderId = 11050, EmployeeId = 8},
+                new Order {OrderId = 11046, EmployeeId = 8},
+                new Order {OrderId = 11036, EmployeeId = 8},
+                new Order {OrderId = 11034, EmployeeId = 8},
+                new Order {OrderId = 11007, EmployeeId = 8},
+                new Order {OrderId = 11058, EmployeeId = 9},
+                new Order {OrderId = 11022, EmployeeId = 9},
+                new Order {OrderId = 11017, EmployeeId = 9},
+                new Order {OrderId = 11016, EmployeeId = 9},
+                new Order {OrderId = 10978, EmployeeId = 9},
+                new Order {OrderId = 10970, EmployeeId = 9},
+                new Order {OrderId = 10963, EmployeeId = 9},
+                new Order {OrderId = 10953, EmployeeId = 9},
+                new Order {OrderId = 10951, EmployeeId = 9},
+                new Order {OrderId = 10942, EmployeeId = 9}
+            }.AsQueryable();
         }
 
         public static IQueryable<OrderDetail> GetOrderDetails()
         {
             return new List<OrderDetail>
-                {
-                    new OrderDetail
-                    {
-                        OrderId = 10250,
-                        ProductId = 41,
-                        Quantity = 10
-                    },
-                    new OrderDetail
-                    {
-                        OrderId = 10250,
-                        ProductId = 51,
-                        Quantity = 35
-                    },
-                    new OrderDetail
-                    {
-                        OrderId = 10250,
-                        ProductId = 65,
-                        Quantity = 15
-                    }
-                }.AsQueryable();
+            {
+                new OrderDetail {OrderId = 10851, ProductId = 2, Quantity = 5},
+                new OrderDetail {OrderId = 10851, ProductId = 25, Quantity = 10},
+                new OrderDetail {OrderId = 10851, ProductId = 57, Quantity = 10},
+                new OrderDetail {OrderId = 10851, ProductId = 59, Quantity = 42},
+                new OrderDetail {OrderId = 10866, ProductId = 2, Quantity = 21},
+                new OrderDetail {OrderId = 10866, ProductId = 24, Quantity = 6},
+                new OrderDetail {OrderId = 10866, ProductId = 30, Quantity = 40},
+                new OrderDetail {OrderId = 10869, ProductId = 1, Quantity = 40},
+                new OrderDetail {OrderId = 10869, ProductId = 11, Quantity = 10},
+                new OrderDetail {OrderId = 10869, ProductId = 23, Quantity = 50},
+                new OrderDetail {OrderId = 10869, ProductId = 68, Quantity = 20},
+                new OrderDetail {OrderId = 10870, ProductId = 35, Quantity = 3},
+                new OrderDetail {OrderId = 10870, ProductId = 51, Quantity = 2},
+                new OrderDetail {OrderId = 10872, ProductId = 55, Quantity = 10},
+                new OrderDetail {OrderId = 10872, ProductId = 62, Quantity = 20},
+                new OrderDetail {OrderId = 10872, ProductId = 64, Quantity = 15},
+                new OrderDetail {OrderId = 10872, ProductId = 65, Quantity = 21},
+                new OrderDetail {OrderId = 10874, ProductId = 10, Quantity = 10},
+                new OrderDetail {OrderId = 10899, ProductId = 39, Quantity = 8},
+                new OrderDetail {OrderId = 10922, ProductId = 17, Quantity = 15},
+                new OrderDetail {OrderId = 10922, ProductId = 24, Quantity = 35},
+                new OrderDetail {OrderId = 10942, ProductId = 49, Quantity = 28},
+                new OrderDetail {OrderId = 10944, ProductId = 11, Quantity = 5},
+                new OrderDetail {OrderId = 10944, ProductId = 44, Quantity = 18},
+                new OrderDetail {OrderId = 10944, ProductId = 56, Quantity = 18},
+                new OrderDetail {OrderId = 10951, ProductId = 33, Quantity = 15},
+                new OrderDetail {OrderId = 10951, ProductId = 41, Quantity = 6},
+                new OrderDetail {OrderId = 10951, ProductId = 75, Quantity = 50},
+                new OrderDetail {OrderId = 10953, ProductId = 20, Quantity = 50},
+                new OrderDetail {OrderId = 10953, ProductId = 31, Quantity = 50},
+                new OrderDetail {OrderId = 10954, ProductId = 16, Quantity = 28},
+                new OrderDetail {OrderId = 10954, ProductId = 31, Quantity = 25},
+                new OrderDetail {OrderId = 10954, ProductId = 45, Quantity = 30},
+                new OrderDetail {OrderId = 10954, ProductId = 60, Quantity = 24},
+                new OrderDetail {OrderId = 10956, ProductId = 21, Quantity = 12},
+                new OrderDetail {OrderId = 10956, ProductId = 47, Quantity = 14},
+                new OrderDetail {OrderId = 10956, ProductId = 51, Quantity = 8},
+                new OrderDetail {OrderId = 10959, ProductId = 75, Quantity = 20},
+                new OrderDetail {OrderId = 10963, ProductId = 60, Quantity = 2},
+                new OrderDetail {OrderId = 10965, ProductId = 51, Quantity = 16},
+                new OrderDetail {OrderId = 10970, ProductId = 52, Quantity = 40},
+                new OrderDetail {OrderId = 10973, ProductId = 26, Quantity = 5},
+                new OrderDetail {OrderId = 10973, ProductId = 41, Quantity = 6},
+                new OrderDetail {OrderId = 10973, ProductId = 75, Quantity = 10},
+                new OrderDetail {OrderId = 10978, ProductId = 8, Quantity = 20},
+                new OrderDetail {OrderId = 10978, ProductId = 21, Quantity = 40},
+                new OrderDetail {OrderId = 10978, ProductId = 40, Quantity = 10},
+                new OrderDetail {OrderId = 10978, ProductId = 44, Quantity = 6},
+                new OrderDetail {OrderId = 10999, ProductId = 41, Quantity = 20},
+                new OrderDetail {OrderId = 10999, ProductId = 51, Quantity = 15},
+                new OrderDetail {OrderId = 10999, ProductId = 77, Quantity = 21},
+                new OrderDetail {OrderId = 11003, ProductId = 1, Quantity = 4},
+                new OrderDetail {OrderId = 11003, ProductId = 40, Quantity = 10},
+                new OrderDetail {OrderId = 11003, ProductId = 52, Quantity = 10},
+                new OrderDetail {OrderId = 11004, ProductId = 26, Quantity = 6},
+                new OrderDetail {OrderId = 11004, ProductId = 76, Quantity = 6},
+                new OrderDetail {OrderId = 11006, ProductId = 1, Quantity = 8},
+                new OrderDetail {OrderId = 11006, ProductId = 29, Quantity = 2},
+                new OrderDetail {OrderId = 11007, ProductId = 8, Quantity = 30},
+                new OrderDetail {OrderId = 11007, ProductId = 29, Quantity = 10},
+                new OrderDetail {OrderId = 11007, ProductId = 42, Quantity = 14},
+                new OrderDetail {OrderId = 11008, ProductId = 28, Quantity = 70},
+                new OrderDetail {OrderId = 11008, ProductId = 34, Quantity = 90},
+                new OrderDetail {OrderId = 11008, ProductId = 71, Quantity = 21},
+                new OrderDetail {OrderId = 11011, ProductId = 58, Quantity = 40},
+                new OrderDetail {OrderId = 11011, ProductId = 71, Quantity = 20},
+                new OrderDetail {OrderId = 11012, ProductId = 19, Quantity = 50},
+                new OrderDetail {OrderId = 11012, ProductId = 60, Quantity = 36},
+                new OrderDetail {OrderId = 11012, ProductId = 71, Quantity = 60},
+                new OrderDetail {OrderId = 11016, ProductId = 31, Quantity = 15},
+                new OrderDetail {OrderId = 11016, ProductId = 36, Quantity = 16},
+                new OrderDetail {OrderId = 11017, ProductId = 3, Quantity = 25},
+                new OrderDetail {OrderId = 11017, ProductId = 59, Quantity = 110},
+                new OrderDetail {OrderId = 11017, ProductId = 70, Quantity = 30},
+                new OrderDetail {OrderId = 11018, ProductId = 12, Quantity = 20},
+                new OrderDetail {OrderId = 11018, ProductId = 18, Quantity = 10},
+                new OrderDetail {OrderId = 11018, ProductId = 56, Quantity = 5},
+                new OrderDetail {OrderId = 11019, ProductId = 46, Quantity = 3},
+                new OrderDetail {OrderId = 11019, ProductId = 49, Quantity = 2},
+                new OrderDetail {OrderId = 11020, ProductId = 10, Quantity = 24},
+                new OrderDetail {OrderId = 11021, ProductId = 2, Quantity = 11},
+                new OrderDetail {OrderId = 11021, ProductId = 20, Quantity = 15},
+                new OrderDetail {OrderId = 11021, ProductId = 26, Quantity = 63},
+                new OrderDetail {OrderId = 11021, ProductId = 51, Quantity = 44},
+                new OrderDetail {OrderId = 11021, ProductId = 72, Quantity = 35},
+                new OrderDetail {OrderId = 11022, ProductId = 19, Quantity = 35},
+                new OrderDetail {OrderId = 11022, ProductId = 69, Quantity = 30},
+                new OrderDetail {OrderId = 11023, ProductId = 7, Quantity = 4},
+                new OrderDetail {OrderId = 11023, ProductId = 43, Quantity = 30},
+                new OrderDetail {OrderId = 11024, ProductId = 26, Quantity = 12},
+                new OrderDetail {OrderId = 11024, ProductId = 33, Quantity = 30},
+                new OrderDetail {OrderId = 11024, ProductId = 65, Quantity = 21},
+                new OrderDetail {OrderId = 11024, ProductId = 71, Quantity = 50},
+                new OrderDetail {OrderId = 11025, ProductId = 1, Quantity = 10},
+                new OrderDetail {OrderId = 11025, ProductId = 13, Quantity = 20},
+                new OrderDetail {OrderId = 11026, ProductId = 18, Quantity = 8},
+                new OrderDetail {OrderId = 11026, ProductId = 51, Quantity = 10},
+                new OrderDetail {OrderId = 11027, ProductId = 24, Quantity = 30},
+                new OrderDetail {OrderId = 11027, ProductId = 62, Quantity = 21},
+                new OrderDetail {OrderId = 11028, ProductId = 55, Quantity = 35},
+                new OrderDetail {OrderId = 11028, ProductId = 59, Quantity = 24},
+                new OrderDetail {OrderId = 11029, ProductId = 56, Quantity = 20},
+                new OrderDetail {OrderId = 11029, ProductId = 63, Quantity = 12},
+                new OrderDetail {OrderId = 11030, ProductId = 2, Quantity = 100},
+                new OrderDetail {OrderId = 11030, ProductId = 5, Quantity = 70},
+                new OrderDetail {OrderId = 11030, ProductId = 29, Quantity = 60},
+                new OrderDetail {OrderId = 11030, ProductId = 59, Quantity = 100},
+                new OrderDetail {OrderId = 11031, ProductId = 1, Quantity = 45},
+                new OrderDetail {OrderId = 11031, ProductId = 13, Quantity = 80},
+                new OrderDetail {OrderId = 11031, ProductId = 24, Quantity = 21},
+                new OrderDetail {OrderId = 11031, ProductId = 64, Quantity = 20},
+                new OrderDetail {OrderId = 11031, ProductId = 71, Quantity = 16},
+                new OrderDetail {OrderId = 11032, ProductId = 36, Quantity = 35},
+                new OrderDetail {OrderId = 11032, ProductId = 38, Quantity = 25},
+                new OrderDetail {OrderId = 11032, ProductId = 59, Quantity = 30},
+                new OrderDetail {OrderId = 11033, ProductId = 53, Quantity = 70},
+                new OrderDetail {OrderId = 11033, ProductId = 69, Quantity = 36},
+                new OrderDetail {OrderId = 11034, ProductId = 21, Quantity = 15},
+                new OrderDetail {OrderId = 11034, ProductId = 44, Quantity = 12},
+                new OrderDetail {OrderId = 11034, ProductId = 61, Quantity = 6},
+                new OrderDetail {OrderId = 11035, ProductId = 1, Quantity = 10},
+                new OrderDetail {OrderId = 11035, ProductId = 35, Quantity = 60},
+                new OrderDetail {OrderId = 11035, ProductId = 42, Quantity = 30},
+                new OrderDetail {OrderId = 11035, ProductId = 54, Quantity = 10},
+                new OrderDetail {OrderId = 11036, ProductId = 13, Quantity = 7},
+                new OrderDetail {OrderId = 11036, ProductId = 59, Quantity = 30},
+                new OrderDetail {OrderId = 11037, ProductId = 70, Quantity = 4},
+                new OrderDetail {OrderId = 11038, ProductId = 40, Quantity = 5},
+                new OrderDetail {OrderId = 11038, ProductId = 52, Quantity = 2},
+                new OrderDetail {OrderId = 11038, ProductId = 71, Quantity = 30},
+                new OrderDetail {OrderId = 11039, ProductId = 28, Quantity = 20},
+                new OrderDetail {OrderId = 11039, ProductId = 35, Quantity = 24},
+                new OrderDetail {OrderId = 11039, ProductId = 49, Quantity = 60},
+                new OrderDetail {OrderId = 11039, ProductId = 57, Quantity = 28},
+                new OrderDetail {OrderId = 11040, ProductId = 21, Quantity = 20},
+                new OrderDetail {OrderId = 11041, ProductId = 2, Quantity = 30},
+                new OrderDetail {OrderId = 11041, ProductId = 63, Quantity = 30},
+                new OrderDetail {OrderId = 11042, ProductId = 44, Quantity = 15},
+                new OrderDetail {OrderId = 11042, ProductId = 61, Quantity = 4},
+                new OrderDetail {OrderId = 11043, ProductId = 11, Quantity = 10},
+                new OrderDetail {OrderId = 11044, ProductId = 62, Quantity = 12},
+                new OrderDetail {OrderId = 11045, ProductId = 33, Quantity = 15},
+                new OrderDetail {OrderId = 11045, ProductId = 51, Quantity = 24},
+                new OrderDetail {OrderId = 11046, ProductId = 12, Quantity = 20},
+                new OrderDetail {OrderId = 11046, ProductId = 32, Quantity = 15},
+                new OrderDetail {OrderId = 11046, ProductId = 35, Quantity = 18},
+                new OrderDetail {OrderId = 11047, ProductId = 1, Quantity = 25},
+                new OrderDetail {OrderId = 11047, ProductId = 5, Quantity = 30},
+                new OrderDetail {OrderId = 11048, ProductId = 68, Quantity = 42},
+                new OrderDetail {OrderId = 11049, ProductId = 2, Quantity = 10},
+                new OrderDetail {OrderId = 11049, ProductId = 12, Quantity = 4},
+                new OrderDetail {OrderId = 11050, ProductId = 76, Quantity = 50},
+                new OrderDetail {OrderId = 11051, ProductId = 24, Quantity = 10},
+                new OrderDetail {OrderId = 11052, ProductId = 43, Quantity = 30},
+                new OrderDetail {OrderId = 11052, ProductId = 61, Quantity = 10},
+                new OrderDetail {OrderId = 11053, ProductId = 18, Quantity = 35},
+                new OrderDetail {OrderId = 11053, ProductId = 32, Quantity = 20},
+                new OrderDetail {OrderId = 11053, ProductId = 64, Quantity = 25},
+                new OrderDetail {OrderId = 11054, ProductId = 33, Quantity = 10},
+                new OrderDetail {OrderId = 11054, ProductId = 67, Quantity = 20},
+                new OrderDetail {OrderId = 11055, ProductId = 24, Quantity = 15},
+                new OrderDetail {OrderId = 11055, ProductId = 25, Quantity = 15},
+                new OrderDetail {OrderId = 11055, ProductId = 51, Quantity = 20},
+                new OrderDetail {OrderId = 11055, ProductId = 57, Quantity = 20},
+                new OrderDetail {OrderId = 11056, ProductId = 7, Quantity = 40},
+                new OrderDetail {OrderId = 11056, ProductId = 55, Quantity = 35},
+                new OrderDetail {OrderId = 11056, ProductId = 60, Quantity = 50},
+                new OrderDetail {OrderId = 11057, ProductId = 70, Quantity = 3},
+                new OrderDetail {OrderId = 11058, ProductId = 21, Quantity = 3},
+                new OrderDetail {OrderId = 11058, ProductId = 60, Quantity = 21},
+                new OrderDetail {OrderId = 11058, ProductId = 61, Quantity = 4},
+                new OrderDetail {OrderId = 11059, ProductId = 13, Quantity = 30},
+                new OrderDetail {OrderId = 11059, ProductId = 17, Quantity = 12},
+                new OrderDetail {OrderId = 11059, ProductId = 60, Quantity = 35},
+                new OrderDetail {OrderId = 11060, ProductId = 60, Quantity = 4},
+                new OrderDetail {OrderId = 11060, ProductId = 77, Quantity = 10},
+                new OrderDetail {OrderId = 11061, ProductId = 60, Quantity = 15},
+                new OrderDetail {OrderId = 11062, ProductId = 53, Quantity = 10},
+                new OrderDetail {OrderId = 11062, ProductId = 70, Quantity = 12},
+                new OrderDetail {OrderId = 11063, ProductId = 34, Quantity = 30},
+                new OrderDetail {OrderId = 11063, ProductId = 40, Quantity = 40},
+                new OrderDetail {OrderId = 11063, ProductId = 41, Quantity = 30},
+                new OrderDetail {OrderId = 11064, ProductId = 17, Quantity = 77},
+                new OrderDetail {OrderId = 11064, ProductId = 41, Quantity = 12},
+                new OrderDetail {OrderId = 11064, ProductId = 53, Quantity = 25},
+                new OrderDetail {OrderId = 11064, ProductId = 55, Quantity = 4},
+                new OrderDetail {OrderId = 11064, ProductId = 68, Quantity = 55},
+                new OrderDetail {OrderId = 11065, ProductId = 30, Quantity = 4},
+                new OrderDetail {OrderId = 11065, ProductId = 54, Quantity = 20},
+                new OrderDetail {OrderId = 11066, ProductId = 16, Quantity = 3},
+                new OrderDetail {OrderId = 11066, ProductId = 19, Quantity = 42},
+                new OrderDetail {OrderId = 11066, ProductId = 34, Quantity = 35},
+                new OrderDetail {OrderId = 11067, ProductId = 41, Quantity = 9},
+                new OrderDetail {OrderId = 11068, ProductId = 28, Quantity = 8},
+                new OrderDetail {OrderId = 11068, ProductId = 43, Quantity = 36},
+                new OrderDetail {OrderId = 11068, ProductId = 77, Quantity = 28},
+                new OrderDetail {OrderId = 11069, ProductId = 39, Quantity = 20},
+                new OrderDetail {OrderId = 11070, ProductId = 1, Quantity = 40},
+                new OrderDetail {OrderId = 11070, ProductId = 2, Quantity = 20},
+                new OrderDetail {OrderId = 11070, ProductId = 16, Quantity = 30},
+                new OrderDetail {OrderId = 11070, ProductId = 31, Quantity = 20},
+                new OrderDetail {OrderId = 11071, ProductId = 7, Quantity = 15},
+                new OrderDetail {OrderId = 11071, ProductId = 13, Quantity = 10},
+                new OrderDetail {OrderId = 11072, ProductId = 2, Quantity = 8},
+                new OrderDetail {OrderId = 11072, ProductId = 41, Quantity = 40},
+                new OrderDetail {OrderId = 11072, ProductId = 50, Quantity = 22},
+                new OrderDetail {OrderId = 11072, ProductId = 64, Quantity = 130},
+                new OrderDetail {OrderId = 11073, ProductId = 11, Quantity = 10},
+                new OrderDetail {OrderId = 11073, ProductId = 24, Quantity = 20},
+                new OrderDetail {OrderId = 11074, ProductId = 16, Quantity = 14},
+                new OrderDetail {OrderId = 11075, ProductId = 2, Quantity = 10},
+                new OrderDetail {OrderId = 11075, ProductId = 46, Quantity = 30},
+                new OrderDetail {OrderId = 11075, ProductId = 76, Quantity = 2},
+                new OrderDetail {OrderId = 11076, ProductId = 6, Quantity = 20},
+                new OrderDetail {OrderId = 11076, ProductId = 14, Quantity = 20},
+                new OrderDetail {OrderId = 11076, ProductId = 19, Quantity = 10},
+                new OrderDetail {OrderId = 11077, ProductId = 2, Quantity = 24},
+                new OrderDetail {OrderId = 11077, ProductId = 3, Quantity = 4},
+                new OrderDetail {OrderId = 11077, ProductId = 4, Quantity = 1},
+                new OrderDetail {OrderId = 11077, ProductId = 6, Quantity = 1},
+                new OrderDetail {OrderId = 11077, ProductId = 7, Quantity = 1},
+                new OrderDetail {OrderId = 11077, ProductId = 8, Quantity = 2},
+                new OrderDetail {OrderId = 11077, ProductId = 10, Quantity = 1},
+                new OrderDetail {OrderId = 11077, ProductId = 12, Quantity = 2},
+                new OrderDetail {OrderId = 11077, ProductId = 13, Quantity = 4},
+                new OrderDetail {OrderId = 11077, ProductId = 14, Quantity = 1},
+                new OrderDetail {OrderId = 11077, ProductId = 16, Quantity = 2},
+                new OrderDetail {OrderId = 11077, ProductId = 20, Quantity = 1},
+                new OrderDetail {OrderId = 11077, ProductId = 23, Quantity = 2},
+                new OrderDetail {OrderId = 11077, ProductId = 32, Quantity = 1},
+                new OrderDetail {OrderId = 11077, ProductId = 39, Quantity = 2},
+                new OrderDetail {OrderId = 11077, ProductId = 41, Quantity = 3},
+                new OrderDetail {OrderId = 11077, ProductId = 46, Quantity = 3},
+                new OrderDetail {OrderId = 11077, ProductId = 52, Quantity = 2},
+                new OrderDetail {OrderId = 11077, ProductId = 55, Quantity = 2},
+                new OrderDetail {OrderId = 11077, ProductId = 60, Quantity = 2},
+                new OrderDetail {OrderId = 11077, ProductId = 64, Quantity = 2},
+                new OrderDetail {OrderId = 11077, ProductId = 66, Quantity = 1},
+                new OrderDetail {OrderId = 11077, ProductId = 73, Quantity = 2},
+                new OrderDetail {OrderId = 11077, ProductId = 75, Quantity = 4},
+                new OrderDetail {OrderId = 11077, ProductId = 77, Quantity = 2}
+            }.AsQueryable();
         }
     }
 }
