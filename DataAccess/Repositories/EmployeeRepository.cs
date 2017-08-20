@@ -29,6 +29,7 @@ namespace DataAccess.Repositories
 
             var page = query.Select(e => new EmployeeSearchResult
             {
+                EmployeeId = e.EmployeeId,
                 FirstName = e.FirstName,
                 LastName = e.LastName,
                 Title = e.Title,
