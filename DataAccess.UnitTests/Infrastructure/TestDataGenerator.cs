@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Entities;
+using Domain.Models.Employee;
 
 namespace DataAccess.UnitTests.Infrastructure
 {
@@ -94,6 +95,22 @@ namespace DataAccess.UnitTests.Infrastructure
                 employee8,
                 employee9
             }.AsQueryable();
+        }
+
+        public static IList<EmployeeSearchResult> GetTotalSoldProductsCalculated()
+        {
+            return new List<EmployeeSearchResult>
+            {
+                new EmployeeSearchResult {EmployeeId = 1, TotalSoldProducts = 699},
+                new EmployeeSearchResult {EmployeeId = 2, TotalSoldProducts = 613},
+                new EmployeeSearchResult {EmployeeId = 3, TotalSoldProducts = 491},
+                new EmployeeSearchResult {EmployeeId = 4, TotalSoldProducts = 517},
+                new EmployeeSearchResult {EmployeeId = 5, TotalSoldProducts = 510},
+                new EmployeeSearchResult {EmployeeId = 6, TotalSoldProducts = 444},
+                new EmployeeSearchResult {EmployeeId = 7, TotalSoldProducts = 892},
+                new EmployeeSearchResult {EmployeeId = 8, TotalSoldProducts = 520},
+                new EmployeeSearchResult {EmployeeId = 9, TotalSoldProducts = 606}
+            }.ToList();
         }
 
         public static IQueryable<Order> GetOrders()
