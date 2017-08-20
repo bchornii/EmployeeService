@@ -67,7 +67,7 @@ namespace DataAccess.UnitTests
         }
 
         [Test]
-        public async Task GetEmployees_PageSize3_Returns3()
+        public async Task GetEmployees_PageSize3_Returns3Records()
         {
             // Arrange
             var employeeRepository = new EmployeeRepository(_fixture.NorthwindContextMock);

@@ -31,22 +31,20 @@ namespace WebServices.UnitTests
 
 
         [Test]
-        public async Task GetEmployees_AnyNotNullRequestObj_ReturnsOk()
+        public async Task GetEmployees_DefaultEmployeeSearchRequest_ReturnsOk()
         {
             // Arrange
             var fixture = new EmployeeControllerFixture()
-                .InitializeEmployeeService();
-
-            var employeeSearchRequest = new EmployeeSearchRequest();
+                .InitializeEmployeeService();            
 
             Mock.Get(fixture.EmployeeServiceMock)
-                .Setup(es => es.GetEmployees(employeeSearchRequest))
+                .Setup(es => es.GetEmployees(It.IsAny<EmployeeSearchRequest>()))
                 .ReturnsAsync(It.IsAny<PagedResult<EmployeeSearchResult>>());
 
             var controller = new EmployeeController(fixture.EmployeeServiceMock);
 
             // Act
-            IHttpActionResult response = await controller.EmployeeSearch(employeeSearchRequest);
+            IHttpActionResult response = await controller.EmployeeSearch(new EmployeeSearchRequest());
 
             // Assert
             Assert.IsInstanceOf<OkNegotiatedContentResult<PagedResult<EmployeeSearchResult>>>(response);
@@ -79,7 +77,7 @@ namespace WebServices.UnitTests
             var controller = new EmployeeController(fixture.EmployeeServiceMock);
 
             // Act
-            IHttpActionResult response = await controller.EmployeeSearch(employeeSearchRequest);
+            await controller.EmployeeSearch(employeeSearchRequest);
 
             // Assert
             Mock.Get(fixture.EmployeeServiceMock).Verify(es => es.GetEmployees(employeeSearchRequest), Times.AtLeastOnce);
@@ -93,21 +91,16 @@ namespace WebServices.UnitTests
                 .InitializeEmployeeService();            
 
             var amountOfResults = 3;
-            var employeeSearchRequest = new EmployeeSearchRequest
-            {
-                SearchKeyWord = EmployeeControllerFixture.EmployeeFirstName
-
-            };
-            var expectedResults = fixture.GetSearchResults(amountOfResults, employeeSearchRequest.SearchKeyWord);
+            var expectedResults = fixture.GetSearchResults(amountOfResults);
             Mock.Get(fixture.EmployeeServiceMock)
-                .Setup(es => es.GetEmployees(employeeSearchRequest))
+                .Setup(es => es.GetEmployees(It.IsAny<EmployeeSearchRequest>()))
                 .ReturnsAsync(expectedResults);            
 
             var controller = new EmployeeController(fixture.EmployeeServiceMock);
 
             // Act
             var response =
-                await controller.EmployeeSearch(employeeSearchRequest) as
+                await controller.EmployeeSearch(new EmployeeSearchRequest()) as
                     OkNegotiatedContentResult<PagedResult<EmployeeSearchResult>>;
 
             // Assert
@@ -116,9 +109,6 @@ namespace WebServices.UnitTests
 
         private class EmployeeControllerFixture
         {
-            public const string EmployeeFirstName = "Margaret";
-            public const string EmployeeLastName = "Peacock";
-
             public IEmployeeService EmployeeServiceMock { get; private set; }            
 
             public EmployeeControllerFixture InitializeEmployeeService()
@@ -127,10 +117,10 @@ namespace WebServices.UnitTests
                 return this;
             }            
 
-            public PagedResult<EmployeeSearchResult> GetSearchResults(int amountOfResults, string firstName) =>
-                GetPageResult(Enumerable.Repeat(new EmployeeSearchResult { FirstName = firstName }, amountOfResults), amountOfResults);
+            public PagedResult<EmployeeSearchResult> GetSearchResults(int amountOfResults) =>
+                GetPageResult(Enumerable.Repeat(new EmployeeSearchResult (), amountOfResults), amountOfResults);
 
-            public PagedResult<EmployeeSearchResult> GetPageResult(IEnumerable<EmployeeSearchResult> items, int count) =>
+            private PagedResult<EmployeeSearchResult> GetPageResult(IEnumerable<EmployeeSearchResult> items, int count) =>
                 new PagedResult<EmployeeSearchResult>(items, count);                           
         }
     }

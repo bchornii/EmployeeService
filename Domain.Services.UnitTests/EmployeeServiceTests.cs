@@ -59,26 +59,7 @@ namespace Domain.Services.UnitTests
         }
 
         [Test]       
-        public void GetEmployees_NullEmployeeSearchRequest_ThrowsException()
-        {
-            // Arrange
-            var fixture = new EmployeeServiceFixture()
-                .InitializeEmployeeRepository()
-                .InitializeUnitOfWork()
-                .InitializeEmployeeService();
-
-            Mock.Get(fixture.EmployeeRepositoryMock)
-                .Setup(r => r.GetEmployees(null))
-                .Throws<NullReferenceException>();
-
-            // Act            
-
-            // Assert
-            Assert.ThrowsAsync<NullReferenceException>(async () => await fixture.EmployeeService.GetEmployees(It.IsAny<EmployeeSearchRequest>()));
-        }
-
-        [Test]
-        public async Task GetEmployees_AnyNotNullSearchRequest_NoExeptions()
+        public void GetEmployees_RepositoryMethodThrowsException_ReThrowsException()
         {
             // Arrange
             var fixture = new EmployeeServiceFixture()
@@ -88,13 +69,12 @@ namespace Domain.Services.UnitTests
 
             Mock.Get(fixture.EmployeeRepositoryMock)
                 .Setup(r => r.GetEmployees(It.IsAny<EmployeeSearchRequest>()))
-                .ReturnsAsync(fixture.GetPageResult(It.IsAny<IEnumerable<EmployeeSearchResult>>(), It.IsAny<int>()));                
+                .Throws<NullReferenceException>();
 
-            // Act
-            var employees = await fixture.EmployeeService.GetEmployees(It.IsAny<EmployeeSearchRequest>());
+            // Act            
 
             // Assert
-            Assert.IsNotNull(employees);
+            Assert.ThrowsAsync<NullReferenceException>(async () => await fixture.EmployeeService.GetEmployees(null));
         }
 
         [Test]
@@ -106,29 +86,21 @@ namespace Domain.Services.UnitTests
                 .InitializeUnitOfWork()
                 .InitializeEmployeeService();
 
-            var amountOfResults = 3;
-            var employeeSearchRequest = new EmployeeSearchRequest
-            {
-                SearchKeyWord = EmployeeServiceFixture.EmployeeFirstName
-
-            };
-            var expectedResults = fixture.GetSearchResults(amountOfResults, employeeSearchRequest.SearchKeyWord);
+            var amountOfResults = 3;            
+            var expectedResults = fixture.GetSearchResults(amountOfResults);
             Mock.Get(fixture.EmployeeRepositoryMock)
-                .Setup(r => r.GetEmployees(employeeSearchRequest))
+                .Setup(r => r.GetEmployees(It.IsAny<EmployeeSearchRequest>()))
                 .ReturnsAsync(expectedResults);
 
             // Act
-            var employees = await fixture.EmployeeService.GetEmployees(employeeSearchRequest);
+            var result = await fixture.EmployeeService.GetEmployees(It.IsAny<EmployeeSearchRequest>());
 
             // Assert
-            CollectionAssert.AreEqual(employees.Items, expectedResults.Items);
+            CollectionAssert.AreEqual(result.Items, expectedResults.Items);
         }
 
         private class EmployeeServiceFixture
         {
-            public const string EmployeeFirstName = "Margaret";
-            public const string EmployeeLastName = "Peacock";
-
             private IUnitOfWork UnitOfWorkMock { get; set; }
             public IEmployeeRepository EmployeeRepositoryMock { get; private set; }
             public IEmployeeService EmployeeService { get; private set; }
@@ -152,8 +124,8 @@ namespace Domain.Services.UnitTests
                 return this;
             }
 
-            public PagedResult<EmployeeSearchResult> GetSearchResults(int amountOfResults, string firstName) =>
-                GetPageResult(Enumerable.Repeat(new EmployeeSearchResult { FirstName = firstName }, amountOfResults), amountOfResults);
+            public PagedResult<EmployeeSearchResult> GetSearchResults(int amountOfResults) =>
+                GetPageResult(Enumerable.Repeat(new EmployeeSearchResult (), amountOfResults), amountOfResults);
 
             public PagedResult<EmployeeSearchResult> GetPageResult(IEnumerable<EmployeeSearchResult> items, int count) =>
                 new PagedResult<EmployeeSearchResult>(items, count);
