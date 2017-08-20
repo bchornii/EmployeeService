@@ -8,13 +8,13 @@ using DataAccess.Infrastructure;
 
 namespace DataAccess.Repositories
 {
-    public interface IRepository<TEntity> where TEntity : class
+    public interface IRepository<TEntity, TKey> where TEntity : class
     {
-        Task<TEntity> Get(int id);
+        Task<TEntity> Get(TKey id);
         Task<IEnumerable<TEntity>> GetAll();        
     }
 
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class
     {
         protected readonly INorthwindContext Context;
         public Repository(INorthwindContext context)
@@ -22,7 +22,7 @@ namespace DataAccess.Repositories
             Context = context;
         }
 
-        public async Task<TEntity> Get(int id)
+        public async Task<TEntity> Get(TKey id)
         {
             return await Context.Set<TEntity>().FindAsync(id);            
         }
