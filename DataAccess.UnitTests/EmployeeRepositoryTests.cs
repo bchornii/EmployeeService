@@ -53,11 +53,11 @@ namespace DataAccess.UnitTests
         }
 
         [Test]
-        public async Task GetEmployees_SearchBy_an_Keyword_Returns6Records()
+        public async Task GetEmployees_SearchBy_an_Predicate_Returns6Records()
         {
             // Arrange
             var employeeRepository = new EmployeeRepository(_fixture.NorthwindContextMock);
-            var employeeSearchRequest = new EmployeeSearchRequest { SearchKeyWord  = "An"};
+            var employeeSearchRequest = new EmployeeSearchRequest { SearchKeyWord  = "An" };
 
             // Act
             var result = await employeeRepository.GetEmployees(employeeSearchRequest);            
@@ -161,6 +161,26 @@ namespace DataAccess.UnitTests
 
             // Assert
             CollectionAssert.AreEqual(result.Items.Select(e => e.LastName), expectedEmloyeesNames);
+        }
+
+        [Test]
+        public async Task GetEmployees_DefaultEmployeeSearchRequest_VerifyTotalSoldProductsPerEmployee()
+        {
+            // Arrange
+            var employeeRepository = new EmployeeRepository(_fixture.NorthwindContextMock);
+            var employeeSearchRequest = new EmployeeSearchRequest();
+            var expectedResult = TestDataGenerator.GetTotalSoldProductsCalculated();
+
+            // Act
+            var result = await employeeRepository.GetEmployees(employeeSearchRequest);
+            var totalSoldProductsResult = from r in result.Items
+                join er in expectedResult on 
+                    new {r.EmployeeId, r.TotalSoldProducts} equals 
+                    new {er.EmployeeId, er.TotalSoldProducts}
+                select 1;
+
+            // Assert
+            Assert.AreEqual(totalSoldProductsResult.Count(), expectedResult.Count);
         }
 
         public class EmployeeRepositoryFixture
